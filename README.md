@@ -20,6 +20,12 @@ void main(List<String> arguments) {
 
 ## Github
 
-Please file feature requests and bugs at the [github][https://github.com/goranskular/maidenhead.git].
+Please file feature requests and bugs at the [github](https://github.com/goranskular/maidenhead.git)
 
-[Github]: https://github.com/goranskular/maidenhead.git
+[Github](https://github.com/goranskular/maidenhead.git)
+
+## pub.dev
+
+[pub.dev](https://pub.dev/packages/maidenhead)
+
+73 de 9A1GS (former 9A3GOS)

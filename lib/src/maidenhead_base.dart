@@ -1,3 +1,6 @@
+import 'package:maidenhead/maidenhead.dart';
+import 'dart:math' as math;
+
 class Maidenhead {
   /// Latitude and Longitude stored in a double
   double lat, lon;
@@ -6,10 +9,10 @@ class Maidenhead {
   String grid;
 
   /// Initialize from latlong and calculate maidenhead grid
-  Maidenhead.latlon(double lat, double lon) {
+  Maidenhead.latlon(double lat, double lon, {int precision = 3}) {
     this.lat = lat;
     this.lon = lon;
-    grid = to_maiden(lat, lon);
+    grid = to_maiden(lat, lon, precision);
   }
 
   /// Initialize from grid and calculate lat and long
@@ -25,7 +28,7 @@ class Maidenhead {
   /// Precision 5 is very accurate
   static String to_maiden(double lat, double lon, [int precision = 3]) {
     //
-    var nA = 'A'.codeUnits.first;
+    final nA = 'A'.codeUnits.first;
     var lon_div = ((lon + 180) / 20).floor().toDouble();
     var lon_remainder = ((lon + 180) % 20).toDouble();
     var lat_div = ((lat + 90) / 10).floor().toDouble();
@@ -75,12 +78,12 @@ class Maidenhead {
     // length is precision level * 2
     // if it is a standard most used precision 3 locator
     // length will be 6  (e.g. 'JN75xu')
-    var lN = grid.length;
-    var nA = 'A'.codeUnits.first;
+    final lN = grid.length;
+    final nA = 'A'.codeUnits.first;
     var lon = -180.0;
     var lat = -90.0;
     // we first need to convert to upper case
-    var maiden = grid.toUpperCase();
+    final maiden = grid.toUpperCase();
     // extract first pair
     lon += (maiden[0].codeUnits.first - nA) * 20;
     lat += (maiden[1].codeUnits.first - nA) * 10;
@@ -110,8 +113,8 @@ class Maidenhead {
     }
 
     // truncate to 6 decimal places
-    lat = num.parse(lat.toStringAsFixed(6));
-    lon = num.parse(lon.toStringAsFixed(6));
+    lat = round(lat, decimals: 6);
+    lon = round(lon, decimals: 6);
 
     return List<double>.unmodifiable([lat, lon]);
   }
@@ -123,5 +126,21 @@ class Maidenhead {
         latlon[0].toString() +
         ',' +
         latlon[1].toString();
+  }
+
+  double distance_to(Maidenhead p2) {
+    return round(Haversine.distance(lat, lon, p2.lat, p2.lon), decimals: 2);
+  }
+
+  double bearing_to(Maidenhead p2) {
+    return round(bearing(lat, lon, p2.lat, p2.lon), decimals: 2);
+  }
+
+  static double bearing(double lat, double lon, double lat2, double lon2) {
+    final diffLon = degToRadian(lon2) - degToRadian(lon);
+    final y = math.sin(diffLon);
+    final x = math.cos(degToRadian(lat)) * math.tan(degToRadian(lat2)) -
+        math.sin(degToRadian(lat)) * math.cos(diffLon);
+    return radianToDeg(math.atan2(y, x));
   }
 }

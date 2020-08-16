@@ -1,7 +1,7 @@
 name: maidenhead
 description: The Maidenhead Locator System (a.k.a. QTH Locator and IARU Locator)
              is a geographic co-ordinate system used by amateur radio operators.
-version: 0.0.3-dev
+version: 0.0.4-dev
 homepage: 'https://blackoutcomms.com/'
 repository: 'https://github.com/goranskular/maidenhead.git'
 

@@ -9,3 +9,7 @@
 ## 0.0.3-dev
 
 - Comments added
+
+## 0.0.4-dev
+
+- Added bearing and Harversine distance calculator with examples

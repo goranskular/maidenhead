@@ -13,3 +13,9 @@
 ## 0.0.4-dev
 
 - Added bearing and Harversine distance calculator with examples
+
+## 0.0.5-dev
+
+- intl 0.16.1
+- validate 1.7.0
+

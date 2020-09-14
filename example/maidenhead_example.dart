@@ -26,7 +26,7 @@ void main(List<String> arguments) {
   var pos2 = Maidenhead.latlon(45.844271, 15.947917, precision: 5);
   var distance = pos1.distance_to(pos2);
   var bearing = pos1.bearing_to(pos2);
-  print('distance: ' + distance.toString() + ' bearing: ' + bearing.toString());
+  print('distance: $distance bearing: $bearing');
   print('pos1 to pos2 distance: ' +
       Haversine.distance_maiden(pos1.grid, pos2.grid).toString());
 
@@ -38,8 +38,5 @@ void main(List<String> arguments) {
   pos2 = Maidenhead.latlon(38.627089, -90.200203, precision: 5); // St. Louis
   distance = pos1.distance_to(pos2);
   bearing = pos1.bearing_to(pos2);
-  print('distance: ' +
-      distance.toString() +
-      ' bearing K. City -> St. Louis: ' +
-      bearing.toString());
+  print('distance: $distance bearing K. City -> St. Louis: $bearing');
 }
